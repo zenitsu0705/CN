@@ -1,50 +1,36 @@
 #include<stdio.h>
-int main() {
-    int data[10];
-    int dataatrec[10],c,c1,c2,c3,i;
-    printf("Enter 4 bits of data one by one\n");
-    scanf("%d",&data[0]);
-    scanf("%d",&data[1]);
-    scanf("%d",&data[2]);
-    scanf("%d",&data[4]);
-    data[6]=data[0]^data[2]^data[4];
-    data[5]=data[0]^data[1]^data[4];
-    data[3]=data[0]^data[1]^data[2];
-    printf("\nEncoded data is\n");
-    for(i=0;i<7;i++)
-        printf("%d",data[i]);
+int main(){
+	int a[10],b[10],c1,c2,c3,i;
+	printf("Enter 4 bits\n");
+	scanf("%d",&a[3]);
+	scanf("%d",&a[5]);
+	scanf("%d",&a[6]);
+	scanf("%d",&a[7]);
+	a[1]=a[3]^a[5]^a[7];
+	a[2]=a[3]^a[6]^a[7];
+	a[4]=a[5]^a[6]^a[7];
+	for(i=1;i<8;i++){
+		printf("%d",a[i]);
+	}
+	printf("Enter 7 bits");
+	for(i=1;i<8;i++){
+		scanf("%d",&b[i]);
+	}	
+	c1=b[1]^b[3]^b[5]^b[7];
+	c2=b[2]^b[3]^b[6]^b[7];
+	c3=b[4]^b[5]^b[6]^b[7];
+	int p=c1*1+c2*2+c3*4;
+	if(p==0){
+		printf("No error");
+	}
+	else{
+		printf("Error at: %d\n",p);
+		if(b[p]==0)
+			b[p]=1;
+		else
+			b[p]=0;
 
-    printf("\n\nEnter received data bits one by one\n");
-    for(i=0;i<7;i++)
-        scanf("%d",&dataatrec[i]);
- 
-    c1=dataatrec[6]^dataatrec[4]^dataatrec[2]^dataatrec[0];
-    c2=dataatrec[5]^dataatrec[4]^dataatrec[1]^dataatrec[0];
-    c3=dataatrec[3]^dataatrec[2]^dataatrec[1]^dataatrec[0];
-    c=c3*4+c2*2+c1 ;
- 
-    if(c==0) {
-        printf("\nNo error while transmission of data\n");
-    }
-    else {
-        printf("\nError on position %d",c);
-    
-        printf("\nData sent : ");
-        for(i=0;i<7;i++)
-            printf("%d",data[i]);
-        
-        printf("\nData received : ");
-        for(i=0;i<7;i++)
-            printf("%d",dataatrec[i]);
-
-        printf("\nCorrect message is\n");
-        if(dataatrec[7-c]==0)   
-            dataatrec[7-c]=1;
-        else    
-            dataatrec[7-c]=0;
-        
-        for (i=0;i<7;i++) {
-            printf("%d",dataatrec[i]);
-        }
-    }
+	}
+	for(i=1;i<8;i++)
+		printf("%d",b[i]);
 }
